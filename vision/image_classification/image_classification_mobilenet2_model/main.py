@@ -7,6 +7,8 @@ import cv2
 from PIL import Image
 import tempfile
 import os
+import requests
+
 os.environ["STREAMLIT_SUPPRESS_ST_EMBEDDED_ERROR"] = "1"
 
 
@@ -41,10 +43,9 @@ def predict(image: np.ndarray, session, input_name, output_name, labels) -> str:
 st.title("🧠 Object Recognition from Webcam using ONNX + MobileNetV2")
 
 # Upload ONNX model
-import os
-import requests
 
-model_url = "https://github.com/onnx/models/raw/main/vision/classification/mobilenet/model/mobilenetv2-7.onnx"
+
+model_url = "https://github.com/onnx/models/blob/main/validated/vision/classification/mobilenet/model/mobilenetv2-7.onnx"
 model_path = "mobilenetv2-7.onnx"
 
 # Download model if not already present
