@@ -49,9 +49,18 @@ model_url = "https://github.com/onnx/models/blob/main/validated/vision/classific
 model_path = "mobilenetv2-7.onnx"
 
 # Download model if not already present
-if not os.path.exists(model_path):
-    with open(model_path, "wb") as f:
-        f.write(requests.get(model_url).content)
+def download_model_if_needed(url: str, path: str):
+    if os.path.exists(path):
+        return
+    response = requests.get(url, stream=True)
+    if response.status_code == 200:
+        with open(path, "wb") as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+    else:
+        raise RuntimeError(f"Failed to download model: {response.status_code}")
+
+download_model_if_needed(model_url, model_path)
 
 session = ort.InferenceSession(model_path)
 # model_path = "mobilenetv2-7.onnx"
