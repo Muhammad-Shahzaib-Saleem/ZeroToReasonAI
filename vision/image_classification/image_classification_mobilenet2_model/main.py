@@ -45,7 +45,8 @@ st.title("🧠 Object Recognition from Webcam using ONNX + MobileNetV2")
 # Upload ONNX model
 
 
-model_url = "https://github.com/onnx/models/blob/main/validated/vision/classification/mobilenet/model/mobilenetv2-7.onnx"
+model_url = "https://github.com/onnx/models/raw/main/validated/vision/classification/mobilenet/model/mobilenetv2-7.onnx"
+
 model_path = "mobilenetv2-7.onnx"
 
 # Download model if not already present
