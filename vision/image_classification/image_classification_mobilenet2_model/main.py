@@ -6,6 +6,9 @@ import onnxruntime as ort
 import cv2
 from PIL import Image
 import tempfile
+import os
+os.environ["STREAMLIT_SUPPRESS_ST_EMBEDDED_ERROR"] = "1"
+
 
 # Load ImageNet labels
 @st.cache_data
