@@ -41,8 +41,20 @@ def predict(image: np.ndarray, session, input_name, output_name, labels) -> str:
 st.title("🧠 Object Recognition from Webcam using ONNX + MobileNetV2")
 
 # Upload ONNX model
+import os
+import requests
+
+model_url = "https://github.com/onnx/models/raw/main/vision/classification/mobilenet/model/mobilenetv2-7.onnx"
 model_path = "mobilenetv2-7.onnx"
+
+# Download model if not already present
+if not os.path.exists(model_path):
+    with open(model_path, "wb") as f:
+        f.write(requests.get(model_url).content)
+
 session = ort.InferenceSession(model_path)
+# model_path = "mobilenetv2-7.onnx"
+# session = ort.InferenceSession(model_path)
 input_name = session.get_inputs()[0].name
 output_name = session.get_outputs()[0].name
 labels = load_labels()
